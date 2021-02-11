@@ -24,6 +24,9 @@ function WikiPage() {
     const [useCustomLang, toggleCustimLang] = React.useState(false)
     const [customLang, setCustomLang] = React.useState("")
 
+    const iframeWidth = !(typeof window === 'undefined' || !window.screen) ? screen.width : 500
+    const iframeHeight = !(typeof window === 'undefined' || !window.screen) ? screen.height : 1000
+
     return (
         <Layout>
             <div className="about-container">
@@ -32,7 +35,7 @@ function WikiPage() {
                 <h2>The largest free wiki!</h2>
 
                 <input value={searchQuery} onChange={e => setQuery(e.target.value)} placeholder="Search the Wiki" />
-                Custom language: <input checked={useCustomLang} onChange={() => toggleCustimLang(!useCustomLang)} />
+                Custom language: <input type="checkbox" checked={useCustomLang} onChange={() => toggleCustimLang(!useCustomLang)} />
                 {useCustomLang && <input value={customLang} onChange={e => setCustomLang(e.target.value)} />}
                 <select onChange={e => setLang(e.target.value)}>
                     {available_languages.map(lan => <option key={lan} value={lan}>{lan}</option>)}
@@ -40,7 +43,8 @@ function WikiPage() {
 
 
                 <div>
-                    <iframe src={`https://${(useCustomLang && customLang != "") ? customLang : lang}.wikipedia.org/wiki/${searchQuery}`} width={screen.width * 0.8} height={screen.height} />
+                    <iframe src={`https://${(useCustomLang && customLang != "") ? customLang : lang}.wikipedia.org/wiki/${searchQuery}`} width={iframeWidth} height={iframeHeight}>
+                    </iframe>
                 </div>
 
 
