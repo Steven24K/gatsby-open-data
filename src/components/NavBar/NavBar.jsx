@@ -9,7 +9,7 @@ const navItems = [
 ]
 
 function NavBar() {
-  let active_path = document.location.pathname
+  let active_path = window.document ? window.document.location.pathname : ''
   active_path = active_path.endsWith('/') ? active_path.slice(0, -1) : active_path
   return (
     <div className="sidebar">
